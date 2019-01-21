@@ -187,7 +187,7 @@ Loading: 0 packages loaded
 This command requires `graphviz` to be installed.  You can install this with `apt-get install -y graphviz`.  This demo uses `graphviz version 2.38.0 (20140413.2041)`.
 
 ```
-bazel query 'deps(//backend:backend-net_net45 --output graph > graph.in
+bazel query 'deps(//backend:backend-net_net45)' --output graph > graph.in
 dot -Tpng < graph.in > graph.png
 ```
 
