@@ -1,0 +1,6 @@
+# Bazel
+bazel-*
+
+# Dependency Graphing
+*.in
+*.png
