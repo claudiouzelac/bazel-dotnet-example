@@ -1,5 +1,67 @@
 # Bazel Commands
 
+## Bazel Build (compile)
+
+### Command Line Input
+
+```
+bazel build //...
+```
+
+NOTE: The `...` shown above will operate upon all files in the Bazel WORKSPACE.  For example, if the command is `build` then all compilation units will be built.  If `test` then
+all tests will be ran.
+
+### Command Line Output
+
+```
+bazel build //...
+INFO: Invocation ID: 17af9dfd-2d92-46f8-82b1-9a0f4b97fad9
+INFO: Analysed 34 targets (0 packages loaded, 0 targets configured).
+INFO: Found 34 targets...
+INFO: Elapsed time: 1.156s, Critical Path: 0.01s
+INFO: 0 processes.
+INFO: Build completed successfully, 1 total action
+```
+
+## Bazel Test
+
+### Command Line Input
+
+```
+bazel test //...
+```
+
+### Command Line Output
+
+```
+bazel test //...
+INFO: Invocation ID: 8fb43b4d-f7dd-4533-9aa3-9684c095884a
+INFO: Analysed 34 targets (0 packages loaded, 0 targets configured).
+INFO: Found 17 targets and 17 test targets...
+INFO: Elapsed time: 5.693s, Critical Path: 1.49s
+INFO: 17 processes: 17 processwrapper-sandbox.
+INFO: Build completed successfully, 18 total actions
+//backend:backend_nunit-net_net45                                        PASSED in 0.7s
+//backend:backend_nunit-net_net451                                       PASSED in 1.3s
+//backend:backend_nunit-net_net452                                       PASSED in 0.7s
+//backend:backend_nunit-net_net46                                        PASSED in 0.9s
+//backend:backend_nunit-net_net461                                       PASSED in 0.8s
+//backend:backend_nunit-net_net462                                       PASSED in 0.6s
+//backend:backend_nunit-net_net47                                        PASSED in 0.7s
+//backend:backend_nunit-net_net471                                       PASSED in 0.6s
+//backend:backend_nunit-net_net472                                       PASSED in 0.7s
+//backend:backend_nunit-net_netstandard1.0                               PASSED in 0.7s
+//backend:backend_nunit-net_netstandard1.1                               PASSED in 0.7s
+//backend:backend_nunit-net_netstandard1.2                               PASSED in 0.7s
+//backend:backend_nunit-net_netstandard1.3                               PASSED in 0.6s
+//backend:backend_nunit-net_netstandard1.4                               PASSED in 0.6s
+//backend:backend_nunit-net_netstandard1.5                               PASSED in 1.1s
+//backend:backend_nunit-net_netstandard1.6                               PASSED in 0.7s
+//backend:backend_nunit-net_netstandard2.0                               PASSED in 0.7s
+
+INFO: Build completed successfully, 18 total actions
+```
+
 ## Show All Dependencies
 
 ### Command Line Input
@@ -157,27 +219,27 @@ Now grab an example project from the above.  These start with double slashes, `/
 ### Command Line Input
 
 ```
-bazel query 'deps(//backend:backend-net_net45)' --output graph
+bazel query 'deps(//backend:backend-net_net472)' --output graph
 ```
 
 ### Sample Command Line Output
 
 ```
-bazel query 'deps(//backend:backend-net_net45)' --output graph
-INFO: Invocation ID: 083bdde3-f8b2-45d8-9c56-35db0cdfa845
+bazel query 'deps(//backend:backend-net_net472)' --output graph
+INFO: Invocation ID: c5228bff-5ba0-44c1-b599-5ff7782b9fa5
 digraph mygraph {
   node [shape=box];
-"//backend:backend-net_net45"
-"//backend:backend-net_net45" -> "//backend:program.cs"
-"//backend:backend-net_net45" -> "@io_bazel_rules_dotnet//:net_context_data_net45"
-"//backend:program.cs"
-"@io_bazel_rules_dotnet//:net_context_data_net45"
-"@io_bazel_rules_dotnet//:net_context_data_net45" -> "@net_sdk_net45//:mono_bin\n@net_sdk_net45//:mcs_bin\n@net_sdk_net45//:lib\n@net_sdk_net45//:tools"
-"@io_bazel_rules_dotnet//:net_context_data_net45" -> "@net_sdk_net45//:tagetframework"
-"@net_sdk_net45//:tagetframework"
-"@net_sdk_net45//:tagetframework" -> "@net_sdk_net45//:targetframework.cs"
-"@net_sdk_net45//:mono_bin\n@net_sdk_net45//:mcs_bin\n@net_sdk_net45//:lib\n@net_sdk_net45//:tools"
-"@net_sdk_net45//:targetframework.cs"
+"//backend:backend-net_net472"
+"//backend:backend-net_net472" -> "//backend:implementation/program.cs"
+"//backend:backend-net_net472" -> "@io_bazel_rules_dotnet//:net_context_data_net472"
+"@io_bazel_rules_dotnet//:net_context_data_net472"
+"@io_bazel_rules_dotnet//:net_context_data_net472" -> "@net_sdk_net472//:lib\n@net_sdk_net472//:mono_bin\n@net_sdk_net472//:mcs_bin\n@net_sdk_net472//:tools"
+"@io_bazel_rules_dotnet//:net_context_data_net472" -> "@net_sdk_net472//:tagetframework"
+"@net_sdk_net472//:tagetframework"
+"@net_sdk_net472//:tagetframework" -> "@net_sdk_net472//:targetframework.cs"
+"//backend:implementation/program.cs"
+"@net_sdk_net472//:targetframework.cs"
+"@net_sdk_net472//:lib\n@net_sdk_net472//:mono_bin\n@net_sdk_net472//:mcs_bin\n@net_sdk_net472//:tools"
 }
 Loading: 0 packages loaded
 ```
