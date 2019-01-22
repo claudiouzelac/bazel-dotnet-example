@@ -30,11 +30,17 @@ load("@io_bazel_rules_dotnet//dotnet:defs.bzl",
      "DOTNET_NET_FRAMEWORKS"
 )
 
-# https://github.com/bazelbuild/rules_dotnet/blob/master/dotnet/platform/list.bzl
+load("//bazel:workspace.bzl", "init_nuget_dependencies")
 
+dotnet_repositories()
+dotnet_register_toolchains()
+
+# NOTE: Supported frameworks are available at:
+# https://github.com/bazelbuild/rules_dotnet/blob/master/dotnet/platform/list.bzl
 [net_register_sdk(
     framework
 ) for framework in DOTNET_NET_FRAMEWORKS]
 
 dotnet_register_toolchains("host")
-# dotnet_repositories()
+
+init_nuget_dependencies()
