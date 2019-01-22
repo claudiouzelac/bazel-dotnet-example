@@ -7,6 +7,7 @@ load("@io_bazel_rules_dotnet//dotnet:defs.bzl",
      "net_xunit_test",
      "net_nunit3_test",
      "DOTNET_NET_FRAMEWORKS",
+     "net_xunit_test"
 )
 
 [net_library(
@@ -17,6 +18,7 @@ load("@io_bazel_rules_dotnet//dotnet:defs.bzl",
     dotnet_context_data = "@io_bazel_rules_dotnet//:net_context_data_{}".format(framework),
     visibility = ["//visibility:public"],
     deps = [
+        "@newtonsoft.json//:{}_net".format(framework),
     ],
 ) for framework in DOTNET_NET_FRAMEWORKS]
 
