@@ -1,5 +1,4 @@
 using System;
-using selfHost;
 
 namespace myApp
 {
