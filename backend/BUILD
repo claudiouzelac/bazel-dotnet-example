@@ -9,6 +9,15 @@ load("@io_bazel_rules_dotnet//dotnet:defs.bzl",
      "DOTNET_NET_FRAMEWORKS",
 )
 
+# TODO: Import Google.Protobuf
+# [net_import_library(
+#     name= "Google.Protobuf-net_{}".format(framework),
+#     src=  "Google.Protobuf.3.6.1/lib/{}/Google.Protobuf.dll".format(framework),
+#     deps = [
+#         "@Google.Protobuf//:{}_net".format(framework),
+#     ]
+# ) for framework in DOTNET_NET_FRAMEWORKS]
+
 [net_library(
     name = "backend-net_{}".format(framework),
     srcs = [
@@ -18,6 +27,8 @@ load("@io_bazel_rules_dotnet//dotnet:defs.bzl",
     visibility = ["//visibility:public"],
     deps = [
         "@newtonsoft.json//:{}_net".format(framework),
+        "@Grpc.Core//:{}_net".format(framework),
+        "@Google.Protobuf//:{}_net".format(framework),
     ],
 ) for framework in DOTNET_NET_FRAMEWORKS]
 
@@ -31,6 +42,6 @@ load("@io_bazel_rules_dotnet//dotnet:defs.bzl",
         "@nunit3//:lib",
         ":backend-net_{}".format(framework),
     ],
-    dotnet_context_data = "@io_bazel_rules_dotnet//:net_context_data_net472",
+    dotnet_context_data = "@io_bazel_rules_dotnet//:net_context_data_{}".format(framework),
     native_deps = "@net_sdk_net472//:native_deps",
 )for framework in DOTNET_NET_FRAMEWORKS]
