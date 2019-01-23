@@ -25,7 +25,7 @@ load("@io_bazel_rules_dotnet//dotnet:defs.bzl",
     name = "backend_nunit-net_{}".format(framework),
     size = "small",
     srcs = [
-        "tests/OnlyTest.cs",
+        "tests/NunitTests.cs",
     ],
     deps = [
         "@nunit3//:lib",
