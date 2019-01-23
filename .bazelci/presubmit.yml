@@ -1,0 +1,7 @@
+---
+platforms:
+  windows:
+    build_targets:
+      - "//..."
+    test_targets:
+      - "//..."
