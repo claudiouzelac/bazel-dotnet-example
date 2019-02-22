@@ -2,6 +2,8 @@ workspace(name = "dotnet_bazel_example")
 
 load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
+load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
 # The Bazel buildtools repo contains tools like the BUILD file formatter, buildifier
 # This commit matches the version of buildifier in angular/ngcontainer
 # If you change this, also check if it matches the version in the angular/ngcontainer
@@ -21,6 +23,12 @@ git_repository(
     commit = "fb2c02eb093464f403859616cbf2225409512a8d",
 )
 
+http_archive(
+    name = "build_stack_rules_proto",
+    urls = ["https://github.com/stackb/rules_proto/archive/91cbae9bd71a9c51406014b8b3c931652fb6e660.tar.gz"],
+    sha256 = "5474d1b83e24ec1a6db371033a27ff7aff412f2b23abba86fedd902330b61ee6",
+    strip_prefix = "rules_proto-91cbae9bd71a9c51406014b8b3c931652fb6e660",
+)
 
 load("@io_bazel_rules_dotnet//dotnet:defs.bzl", 
      "dotnet_register_toolchains", 
@@ -31,10 +39,11 @@ load("@io_bazel_rules_dotnet//dotnet:defs.bzl",
 )
 
 load("//bazel:workspace.bzl", "init_nuget_dependencies")
+load("@build_stack_rules_proto//csharp:deps.bzl", "csharp_proto_compile")
 
 dotnet_repositories()
 dotnet_register_toolchains()
-
+csharp_proto_compile()
 # NOTE: Supported frameworks are available at:
 # https://github.com/bazelbuild/rules_dotnet/blob/master/dotnet/platform/list.bzl
 [net_register_sdk(
