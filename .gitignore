@@ -1,6 +1,9 @@
 # Bazel
 bazel-*
 
-# Dependency Graphing
+# Jetbrains Rider
+.idea
+
+# Bazel Dependency Graphing
 *.in
 *.png

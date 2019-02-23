@@ -55,13 +55,6 @@ proto_library(
     visibility = ["//visibility:public"],
 )
 
-filegroup(
-    name = "routeguide_features",
-    srcs = [
-        "routeguide_features.json",
-    ],
-    visibility = ["//visibility:public"],
-)
 
 proto_library(
     name = "greeter_grpc",

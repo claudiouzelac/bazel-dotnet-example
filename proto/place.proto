@@ -3,9 +3,9 @@
 	
 	package example.proto;
 	
-	import "example/proto/thing.proto";
+	import "proto/thing.proto";
 	
 	message Place {
 	    string name = 1;
-	    example.proto.Thing thing = 2;
+	    proto.Thing thing = 2;
 	}
